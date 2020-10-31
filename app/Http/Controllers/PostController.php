@@ -4,15 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
     public function index()
     {
-        dd('arbacadabra');
+        $posts = DB::table('posts')
+            ->limit(10)
+            ->orderBy('id', 'DESC')
+            ->get();
+        //dd($posts);
+        return view('posts.show', ['posts' => $posts]);
+
     }
 
-    public function create()
+    public function create(Request $request)
     {
         return view('posts.create');
     }
@@ -30,11 +37,16 @@ class PostController extends Controller
                 ->withErrors($validator)
                 ->withInput($request->only('title', 'description'));
         }
+        DB::table('posts')->insert([
+            'name' => $request->input('title'),
+            'description' => $request->input('description')
+        ]);
+        return redirect()->route('posts.create');
     }
 
     public function show($id)
     {
-        //
+
     }
 
     public function edit($id)

@@ -8,6 +8,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('home') }}">Головна</a>
             </li>
+            <a class="nav-link" href="{{route('users.index') }}">Користувачі</a>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Пости
